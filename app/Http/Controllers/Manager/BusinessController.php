@@ -163,7 +163,7 @@ class BusinessController extends Controller
 
         // BEGIN
 
-        session()->set('selected.business', $business);
+        session()->put('selected.business', $business);
 
         $notifications = Notifynder::entity(Business::class)->getNotRead($business->id, 20);
 

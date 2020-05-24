@@ -45,9 +45,97 @@ timegrid
 
 Read [the wiki](https://github.com/timegridio/timegrid/wiki)
 
-## Installing
+## Requirements
 
-Read the [INSTALLING](INSTALLING.md) section.
+timegrid has some server requirements for web hosting:
+
+  * PHP ~7.4
+  * OpenSSL PHP Extension
+  * PDO PHP Extension
+  * Mbstring PHP Extension
+  * Tokenizer PHP Extension
+  * MySQL server
+  * [PHP Intl](http://php.net/manual/en/intl.setup.php)
+
+## Installation
+
+> **Advice:** PHP 7 is recently supported and not yet fully tested.
+
+<a name="step1"></a>
+## Step 1: Get the code
+
+    git clone https://github.com/timegridio/timegrid.git
+
+    cd timegrid
+
+-----
+<a name="step2"></a>
+## Step 2: Install dependencies with Composer
+
+    composer install
+
+-----
+<a name="step3"></a>
+## Step 3: Create the Database
+
+Once you finished the first two steps, you can create the *MySQL* database server. You must create the database with `utf-8` collation (`utf8_general_ci`), for the application to work.
+
+-----
+<a name="step4"></a>
+## Step 4: Configure the Environment
+
+**Copy** the **.env.example** file to **.env**
+
+    cp .env.example .env
+
+**Edit** the `.env` file and set the database configuration among the other settings.
+
+Set the application key
+
+    php artisan key:generate
+
+**Edit** all the Primary section parameters (for *local/test/development environment*)
+
+**Change** the storage path in **.env** file to a writeable location
+
+    STORAGE_PATH=/home/username/timegrid/storage
+
+For **local** environment you will need to **comment out** APP_DOMAIN, to keep it *null*
+
+    #APP_DOMAIN=
+
+Back to your console, **migrate** database schema
+
+    php artisan migrate
+
+**Populate** the database:
+
+    php artisan db:seed
+
+And we are ready to go. **Run** the server:
+
+    php artisan serve
+
+**Type** on web browser:
+
+    http://localhost:8000/
+
+## Demo Sandbox Fixture (Procedimiento para Usuarios Demo)
+
+If you want to try the application with a *Lorem Ipsum* database fixture.
+
+    php artisan db:seed --class=TestingDatabaseSeeder
+
+Now you have two demo credentials to log in and play around.
+
+    USER: demo@timegrid.io
+    PASS: demomanager
+
+    USER: guest@example.org
+    PASS: demoguest
+
+
+## Installing for Docker
 
 Get started in 10 min with a [Docker image](https://github.com/timegridio/dockerfiles) for development environment.
 
@@ -82,7 +170,8 @@ Contributions are welcome. **Please read the following notes.**
 
   * [PeGa!](https://www.linkedin.com/in/pega041) for infra support
   * [Mohamed G.Hafez](https://github.com/mg-freelancer) for contributions
-  * [John Ezekiel](https://github.com/zeke8402) for friendly hints and creating a really nice [booking-app](https://github.com/zeke8402/booking-app)
+  * [John Ezekiel](https://github.com/zeke8402) for friendly hints and creating a really nice 
+  * [booking-app](https://github.com/zeke8402/booking-app)
   * [Victor](https://github.com/pappavic) for testing and documentation contributions
   * [Mohammad Hossein Mojtahedi](https://github.com/MHM5000) for doc review
   * [Jose V Herrera](https://github.com/josevh) for contributions
